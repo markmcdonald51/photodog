@@ -1,0 +1,11 @@
+p style="color: green" = notice
+
+h1 Magazines
+
+#magazines
+  - @magazines.each do |magazine|
+    == render magazine
+    p
+      = link_to "Show this magazine", magazine
+
+= link_to "New magazine", new_magazine_path
