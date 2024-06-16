@@ -30,23 +30,30 @@ namespace :manage_google do
     puts "Json: #{json_files.length}"
 
     json_files.each_with_index do |f,i|
+      dh = {}
       file = File.read(f)
       json = JSON.parse(file)
-      #pp json
+      pp json
       p = json['people']
       p.map{|n| people[ n['name']]  += 1 } if p.present?
-      
+
+      dh[:title] = json.dig('title')
+      dh[:latitude] = json.dig('geoData', 'latitude')
+      dh[:longitude] = json.dig('geoData', 'longitude')
+      dh[:image_views] = json.dig('imageViews')
+      dh[:photo_taken_time] = Time.parse(json.dig('photoTakenTime', 'formatted'))
+      dh[:url] = json.dig('url')
+      dh[:description] = json.dig('description')
+      dh[:device_type] = json.dig('googlePhotosOrigin', 'mobileUpload', 'deviceType')
+      dh[:title] = json.dig('title')
       #people[ person ] += 1
+      binding.pry
     end
     pp people.sort_by{|k,v| v }.reverse
-
-
     mp4s  = Dir["#{dir}/**/*.mp4"]
     puts "Mp4s: #{mp4s.length}"
 
     binding.pry
-
-
 
     # File.size("Compressed/#{project}.tar.bz2") / 1024000
 =begin    
