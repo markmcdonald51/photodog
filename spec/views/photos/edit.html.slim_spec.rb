@@ -4,6 +4,7 @@ RSpec.describe "photos/edit", type: :view do
   let(:photo) {
     Photo.create!(
       title: "MyString",
+      altitude: "9.99",
       latitude: "9.99",
       longitude: "9.99",
       image_views: 1,
@@ -24,6 +25,8 @@ RSpec.describe "photos/edit", type: :view do
     assert_select "form[action=?][method=?]", photo_path(photo), "post" do
 
       assert_select "input[name=?]", "photo[title]"
+
+      assert_select "input[name=?]", "photo[altitude]"
 
       assert_select "input[name=?]", "photo[latitude]"
 

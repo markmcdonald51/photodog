@@ -41,6 +41,7 @@ namespace :manage_google do
       dh[:title] = json.dig('title')
       dh[:latitude] = json.dig('geoData', 'latitude')
       dh[:longitude] = json.dig('geoData', 'longitude')
+      dh[:altitude] = json.dig('geoData', 'altitude')
       dh[:image_views] = json.dig('imageViews')
       dh[:photo_taken_time] = Time.parse(json.dig('photoTakenTime', 'formatted')) unless json.dig('photoTakenTime', 'formatted').blank?
       dh[:url] = json.dig('url')

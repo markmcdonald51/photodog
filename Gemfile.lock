@@ -14,6 +14,12 @@ GIT
       actionpack (>= 5.2)
       railties (>= 5.2)
 
+PATH
+  remote: vendor/gems
+  specs:
+    mountable_locations (0.1.0)
+      rails (>= 7.1.3.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -501,6 +507,7 @@ DEPENDENCIES
   jbuilder
   jsbundling-rails
   madmin
+  mountable_locations!
   name_of_person!
   noticed (~> 2.0)
   omniauth-facebook (~> 8.0)

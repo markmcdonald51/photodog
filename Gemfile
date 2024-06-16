@@ -36,6 +36,8 @@ gem 'acts_as_tree'
 gem 'acts_as_list'
 gem 'cancancan'
 
+gem 'mountable_locations',   path: "vendor/gems" #, github: 'markmcdonald51/mountable_locations',
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
