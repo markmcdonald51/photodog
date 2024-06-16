@@ -1,0 +1,17 @@
+= simple_form_for(@photo) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-inputs
+    = f.input :title
+    = f.input :latitude
+    = f.input :longitude
+    = f.input :image_views
+    = f.input :photo_taken_time
+    = f.input :url
+    = f.input :description
+    = f.input :device_type
+    = f.association :user
+
+  .form-actions
+    = f.button :submit
