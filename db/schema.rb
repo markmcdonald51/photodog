@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_06_06_080159) do
+ActiveRecord::Schema[7.2].define(version: 2024_06_16_061009) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -126,6 +126,21 @@ ActiveRecord::Schema[7.2].define(version: 2024_06_06_080159) do
     t.index ["recipient_type", "recipient_id"], name: "index_noticed_notifications_on_recipient"
   end
 
+  create_table "photos", force: :cascade do |t|
+    t.string "title"
+    t.decimal "latitude"
+    t.decimal "longitude"
+    t.integer "image_views"
+    t.datetime "photo_taken_time"
+    t.string "url"
+    t.text "description"
+    t.string "device_type"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_photos_on_user_id"
+  end
+
   create_table "services", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "provider"
@@ -161,5 +176,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_06_06_080159) do
   add_foreign_key "articles", "authors"
   add_foreign_key "articles", "issues"
   add_foreign_key "issues", "magazines"
+  add_foreign_key "photos", "users"
   add_foreign_key "services", "users"
 end

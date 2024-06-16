@@ -1,6 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resources :photos
   resources :magazines do
     resources :authors
     resources :issues do

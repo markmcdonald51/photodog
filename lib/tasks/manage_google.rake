@@ -1,6 +1,6 @@
 namespace :manage_google do
   desc "Removes the duplicate file that was editied in google photos"
-  task :remove_dups, [:dir, :test] do |t, args|
+  task :remove_dups, [:dir, :test] => :environment do |t, args|
     dir   = args[:dir]
     test  = args[:test] ? true : false
 
@@ -37,23 +37,23 @@ namespace :manage_google do
       p = json['people']
       p.map{|n| people[ n['name']]  += 1 } if p.present?
 
+      dh[:user] = User.first
       dh[:title] = json.dig('title')
       dh[:latitude] = json.dig('geoData', 'latitude')
       dh[:longitude] = json.dig('geoData', 'longitude')
       dh[:image_views] = json.dig('imageViews')
-      dh[:photo_taken_time] = Time.parse(json.dig('photoTakenTime', 'formatted'))
+      dh[:photo_taken_time] = Time.parse(json.dig('photoTakenTime', 'formatted')) unless json.dig('photoTakenTime', 'formatted').blank?
       dh[:url] = json.dig('url')
       dh[:description] = json.dig('description')
       dh[:device_type] = json.dig('googlePhotosOrigin', 'mobileUpload', 'deviceType')
-      dh[:title] = json.dig('title')
       #people[ person ] += 1
-      binding.pry
+      Photo.create!(dh)
     end
     pp people.sort_by{|k,v| v }.reverse
     mp4s  = Dir["#{dir}/**/*.mp4"]
     puts "Mp4s: #{mp4s.length}"
 
-    binding.pry
+
 
     # File.size("Compressed/#{project}.tar.bz2") / 1024000
 =begin    
