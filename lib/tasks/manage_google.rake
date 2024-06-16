@@ -4,34 +4,52 @@ namespace :manage_google do
     dir   = args[:dir]
     test  = args[:test] ? true : false
 
+    puts "Test: #{test}"
     puts "Searching through: #{dir}..."
-    # Initialize an array to store the filenames
     
-    photo_dups = Dir["#{dir}/**/*-edited.jpg"]
-    puts "Photo Dups: #{photo_dups.length}"
+    people = Hash.new(0)
 
-    size_of_dups = photo_dups.map{|f| File.size(f)}.inject(0, :+)
+    puts "Iterate over the files to find duplicate filenames..."
+    all_photos = Dir["#{dir}/**/*.jpg"]
+    photos_edited = all_photos.select { |file| file[/\d+\-edited.jpg$/i] }
+    puts "Photo Dups: #{photos_edited.length}"
+
+    size_of_dups = photos_edited.map{|f| File.size(f)}.inject(0, :+)
     puts "Size of Dups: #{size_of_dups/ 1024000} Megsbytes"
 
-    json  = Dir["#{dir}/**/*.json"]
-    puts "Json: {json.length}"
+    photos_edited.each_with_index do |ef,i|
+      p = ef.gsub(/\-edited/, '')  
+      if File.exist?(p)   
+        FileUtils.rm(p, force: true) unless test
+        puts "#{i} Deleting #{p}"
+      end
+      all_photos.delete(p)
+    end
+
+    json_files= Dir["#{dir}/**/*.json"]
+    puts "Json: #{json_files.length}"
+
+    json_files.each_with_index do |f,i|
+      file = File.read(f)
+      json = JSON.parse(file)
+      #pp json
+      p = json['people']
+      p.map{|n| people[ n['name']]  += 1 } if p.present?
+      
+      #people[ person ] += 1
+    end
+    pp people.sort_by{|k,v| v }.reverse
+
 
     mp4s  = Dir["#{dir}/**/*.mp4"]
     puts "Mp4s: #{mp4s.length}"
 
-    # Iterate over the files to find duplicate filenames
-    photo_dups.each do |file|
-      dup_file_path = file.gsub(/\-edited\.jpg/, '.jpg')
-      
-      
-      if File.exist?(dup_file_path)
-        puts "#{dup_file_path} exists"
-        binding.pry
-      end
-    end
+    binding.pry
+
+
 
     # File.size("Compressed/#{project}.tar.bz2") / 1024000
-    
+=begin    
     # Find duplicate filenames
     duplicates = filenames.select { |filename| filenames.count(filename) > 1 }
     
@@ -43,12 +61,10 @@ namespace :manage_google do
     end
     
     puts "Duplicate files removed successfully."
+=end
 
 
 
-
-
-    binding.pry
   end
 
 
