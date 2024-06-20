@@ -3,10 +3,11 @@ p style="color: green" = notice
 h1 Photos
 
 #photos
-  - @photos.each do |photo|
-    == render photo
-    p
-      = link_to "Show this photo", photo
+  .row
+    - @photos.each do |photo|
+      .col
+        == render photo
+       
   = paginate @photos, theme: 'bootstrap-5',
     pagination_class: "pagination-sm flex-wrap justify-content-center",
     nav_class: "d-inline-block"
