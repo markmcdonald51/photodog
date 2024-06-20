@@ -7,5 +7,9 @@ h1 Photos
     == render photo
     p
       = link_to "Show this photo", photo
+  = paginate @photos, theme: 'bootstrap-5',
+    pagination_class: "pagination-sm flex-wrap justify-content-center",
+    nav_class: "d-inline-block"
+
 
 = link_to "New photo", new_photo_path
