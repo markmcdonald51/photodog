@@ -48,7 +48,11 @@ namespace :manage_google do
       dh[:description] = json.dig('description')
       dh[:device_type] = json.dig('googlePhotosOrigin', 'mobileUpload', 'deviceType')
       #people[ person ] += 1
-      Photo.create!(dh)
+      photo = Photo.create!(dh)
+
+      photo.image.attach(io: File.open(f))
+      binding.pry
+
     end
     pp people.sort_by{|k,v| v }.reverse
     mp4s  = Dir["#{dir}/**/*.mp4"]

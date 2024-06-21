@@ -2,15 +2,30 @@ class Photo < ApplicationRecord
   belongs_to :user
   reverse_geocoded_by :latitude, :longitude
 
-  attr_accessor :address
-
   has_one_attached :image do |attachable|
     attachable.variant :thumb, resize_to_limit: [100, 100]
   end
+  
+  attr_accessor :address
+
+
 
 =begin  
 
-4 Removing Files
+    if poster_images.present?
+      db_poster_medium = URI.open(poster_images.third)
+      self.poster.attach(io: db_poster_medium   , filename: "medium.jpg")
+    end
+
+<!-- MiniMagick -->
+<%= image_tag user.avatar.variant(resize_to_limit: [100, 100], format: :jpeg, sampling_factor: "4:2:0", strip: true, interlace: "JPEG", colorspace: "sRGB", quality: 80) %>
+
+<!-- Vips -->
+<%= image_tag user.avatar.variant(resize_to_limit: [100, 100], format: :jpeg, saver: { subsample_mode: "on", strip: true, interlace: true, quality: 80 }) %>
+
+
+
+Removing Files
 
 To remove an attachment from a model, call purge on the attachment. If your application is set up to use Active Job, removal can be done in the background instead by calling purge_later. Purging deletes the blob and the file from the storage service.
 
