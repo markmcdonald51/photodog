@@ -1,6 +1,6 @@
 div id="#{dom_id photo}"
   = link_to photo.title  do 
-    = image_tag '', class: "placeholder img-thumbnail card-img-top shadow-sm",
+    = image_tag photo.image.variant(:thumb), class: "placeholder img-thumbnail card-img-top shadow-sm",
       alt: photo.title, size: '10x10'
     .small.text-center = photo.title
 

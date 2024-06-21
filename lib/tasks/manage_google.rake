@@ -50,7 +50,7 @@ namespace :manage_google do
       #people[ person ] += 1
       photo = Photo.create!(dh)
 
-      photo.image.attach(io: File.open(f))
+      photo.image.attach(io: File.open(f), filename: dh[:title])
       binding.pry
 
     end
