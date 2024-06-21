@@ -1,8 +1,11 @@
 div id="#{dom_id photo}"
   = link_to photo.title  do 
-    = image_tag '', class: "placeholder float-start img-thumbnail rounded img-fluid card-img-top", alt: photo.title, size: '10x10'
+    = image_tag '', class: "placeholder img-thumbnail card-img-top shadow-sm",
+      alt: photo.title, size: '10x10'
+    .small.text-center = photo.title
 
 / 
+  rounded img-fluid
   class: "img-thumbnail rounded float-start img-fluid card-img-top"
   img-thumbnail rounded float-start img-fluid card-img-top
   p
@@ -35,3 +38,93 @@ div id="#{dom_id photo}"
   p
     strong User:
     =< photo.user_id
+
+  
+= alert_helper :danger, dismissble: true do
+  this is am alert test test
+
+= badge_helper(:primary) do 
+  this is a badge test
+
+= dropdown_helper class: "btn-group" do |dropdown| 
+  button.btn.btn-primary Dropdown
+  = dropdown.caret :primary
+  = dropdown.menu do |menu| 
+    = menu.link 'Dropdown Link', '#'
+    = menu.link 'Dropdown Link', '#'
+
+= modal_helper id: 'exampleModal', vcentered: true do |m|
+  = m.header do 
+      = m.title { 'Example Modal' } 
+      = m.close_button 
+  = m.body do
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel nisi tempora, eius iste sit nobis
+      earum in harum optio dolore explicabo. Eveniet reprehenderit harum itaque ad fuga beatae, quasi
+      sequi! Laborum ea porro nihil ipsam repudiandae vel harum voluptates minima corrupti unde quas,
+      dolore possimus doloribus voluptatem sint fuga dolores odio dignissimos at molestias earum.
+  = m.footer do 
+    = m.close_button class: 'btn btn-secondary' do 
+      Close
+
+button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+  h3 Launch Modal
+
+
+= card_helper do |c|
+  = c.header class: 'text-white bg-primary' do
+    h4
+      | This is the header...
+  = c.body do
+    = c.title { 'This is the title' }
+    = c.text { 'This card body' }
+    ul
+      - [1, 2, 3].each do |x|
+        li
+          | Item: 
+          = x
+  = c.footer do
+    |  This is the footer... 
+- # Horizontal
+.row
+  .col-sm.mt-3.mb-3
+    = card_helper do |c|
+      .row.no-gutters
+        .col-md-4
+          / = image_tag 'placeholder.svg', class: 'card-img'
+        .col-md-8
+          = c.body do
+            = c.title { "Card title" }
+            = c.text { "This is a wider card with supporting text below as a natural lead-in to additional content." }
+            = c.text do
+              small.text-muted
+                | Last updated 3 mins ago
+
+= offcanvas_helper scrollable: true do |off|
+  = off.link class: 'btn btn-danger' do
+    strong
+      | *
+    |  Open sidebar 
+  = off.content do |c|
+    = c.header do
+      = c.title { 'Sidebar content' }
+      = c.close_button class: 'btn btn-info' do
+        |  Close 
+    = c.body do
+      p
+        | Some content in the sidebar!
+
+
+
+= dropdown_helper class: "btn-group" do |dropdown|
+  button.btn.btn-primary[type="button"] Dropdown
+
+
+/
+  div
+    => link_to "Edit this photos", edit_photo_path(@photo)
+    '|
+    =< link_to "Back to photos", photos_path
+
+    / = button_to "Destroy this p", @photo, method: :delete, data: { turbo_confirm: 'Really Delete?' }
+
+
