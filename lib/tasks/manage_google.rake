@@ -12,10 +12,7 @@ namespace :manage_google do
     puts "Iterate over the files to find duplicate filenames..."
     all_photos = Dir["#{dir}/**/*.jpg"]
     photos_edited = all_photos.select { |file| file[/\d+\-edited.jpg$/i] }
-
     puts "Photo Dups: #{photos_edited.length}"
-
-   
 
     size_of_dups = photos_edited.map{|f| File.size(f)}.inject(0, :+)
     puts "Size of Dups: #{size_of_dups/ 1024000} Megsbytes"
@@ -67,11 +64,12 @@ namespace :manage_google do
       photo_file_name = File.basename(f, '.*')
       photo_file_name = File.basename(photo_file_name, '.*')
 
-      all_photos
+
+      #dh[:title]
+      photo_path = all_photos_hash[photo_file_name]
       binding.pry
-      photo.image.attach(io: File.open(f), filename: dh[:title])
-
-
+      binding.pry unless photo_path.present?
+      photo.image.attach(io: File.open(photo_path), filename: dh[:title])
     end
     pp people.sort_by{|k,v| v }.reverse
     mp4s  = Dir["#{dir}/**/*.mp4"]
