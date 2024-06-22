@@ -12,7 +12,10 @@ namespace :manage_google do
     puts "Iterate over the files to find duplicate filenames..."
     all_photos = Dir["#{dir}/**/*.jpg"]
     photos_edited = all_photos.select { |file| file[/\d+\-edited.jpg$/i] }
+
     puts "Photo Dups: #{photos_edited.length}"
+
+   
 
     size_of_dups = photos_edited.map{|f| File.size(f)}.inject(0, :+)
     puts "Size of Dups: #{size_of_dups/ 1024000} Megsbytes"
@@ -24,6 +27,15 @@ namespace :manage_google do
         puts "#{i} Deleting #{p}"
       end
       all_photos.delete(p)
+      photos_edited.delete_at(i)
+    end
+
+    all_photos_hash = {}
+    all_photos.each do |p|
+      photo_file_name = File.basename(p, '.*')
+      photo_file_name = File.basename(photo_file_name, '.*')
+      photo_file_name.delete!('-edited')
+      all_photos_hash[photo_file_name] = p
     end
 
     json_files= Dir["#{dir}/**/*.json"]
@@ -50,8 +62,15 @@ namespace :manage_google do
       #people[ person ] += 1
       photo = Photo.create!(dh)
 
-      photo.image.attach(io: File.open(f), filename: dh[:title])
+      # Remove the .jpeg.json to locate the actual location in the 
+      # app_photos array
+      photo_file_name = File.basename(f, '.*')
+      photo_file_name = File.basename(photo_file_name, '.*')
+
+      all_photos
       binding.pry
+      photo.image.attach(io: File.open(f), filename: dh[:title])
+
 
     end
     pp people.sort_by{|k,v| v }.reverse
