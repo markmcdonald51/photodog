@@ -39,6 +39,7 @@ namespace :manage_google do
     puts "Json: #{json_files.length}"
 
     json_files.each_with_index do |f,i|
+      next if f =~ /metadata.json$/
       dh = {}
       file = File.read(f)
       json = JSON.parse(file)
@@ -67,9 +68,9 @@ namespace :manage_google do
 
       #dh[:title]
       photo_path = all_photos_hash[photo_file_name]
-      binding.pry
       binding.pry unless photo_path.present?
       photo.image.attach(io: File.open(photo_path), filename: dh[:title])
+    
     end
     pp people.sort_by{|k,v| v }.reverse
     mp4s  = Dir["#{dir}/**/*.mp4"]
