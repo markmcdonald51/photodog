@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_06_16_081701) do
+ActiveRecord::Schema[7.2].define(version: 2024_06_22_094212) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -68,6 +68,27 @@ ActiveRecord::Schema[7.2].define(version: 2024_06_16_081701) do
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_articles_on_author_id"
     t.index ["issue_id"], name: "index_articles_on_issue_id"
+  end
+
+  create_table "attachments", force: :cascade do |t|
+    t.string "title"
+    t.decimal "altitude"
+    t.decimal "latitude"
+    t.decimal "longitude"
+    t.integer "image_views"
+    t.datetime "photo_taken_time"
+    t.string "url"
+    t.text "description"
+    t.integer "device_id"
+    t.integer "user_id", null: false
+    t.string "attachable_type"
+    t.integer "attachable_id"
+    t.string "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["attachable_type", "attachable_id"], name: "index_attachments_on_attachable"
+    t.index ["device_id"], name: "index_attachments_on_device_id"
+    t.index ["user_id"], name: "index_attachments_on_user_id"
   end
 
   create_table "authors", force: :cascade do |t|
@@ -129,6 +150,12 @@ ActiveRecord::Schema[7.2].define(version: 2024_06_16_081701) do
     t.decimal "lat"
     t.decimal "lng"
     t.datetime "created_at", precision: nil, null: false
+  end
+
+  create_table "devices", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -248,6 +275,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_06_16_081701) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "articles", "authors"
   add_foreign_key "articles", "issues"
+  add_foreign_key "attachments", "users"
   add_foreign_key "country_languages", "countries"
   add_foreign_key "country_languages", "languages"
   add_foreign_key "issues", "magazines"

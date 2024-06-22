@@ -1,0 +1,10 @@
+p style="color: green" = notice
+
+== render @attachment_video
+
+div
+  => link_to "Edit this video", edit_attachment_video_path(@attachment_video)
+  '|
+  =< link_to "Back to videos", attachment_videos_path
+
+  = button_to "Destroy this video", @attachment_video, method: :delete

@@ -1,6 +1,12 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resources :devices
+  namespace :attachment do
+    resources :videos
+    resources :photos
+  end
+  resources :attachments
   resources :photos
   resources :magazines do
     resources :authors

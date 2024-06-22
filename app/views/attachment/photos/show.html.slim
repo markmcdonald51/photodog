@@ -1,0 +1,10 @@
+p style="color: green" = notice
+
+== render @attachment_photo
+
+div
+  => link_to "Edit this photo", edit_attachment_photo_path(@attachment_photo)
+  '|
+  =< link_to "Back to photos", attachment_photos_path
+
+  = button_to "Destroy this photo", @attachment_photo, method: :delete
