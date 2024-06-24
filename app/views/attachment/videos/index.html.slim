@@ -1,0 +1,11 @@
+p style="color: green" = notice
+
+h1 Videos
+
+#attachment_videos
+  - @attachment_videos.each do |attachment_video|
+    == render attachment_video
+    p
+      = link_to "Show this video", attachment_video
+
+= link_to "New video", new_attachment_video_path

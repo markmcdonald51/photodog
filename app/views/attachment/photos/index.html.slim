@@ -1,0 +1,11 @@
+p style="color: green" = notice
+
+h1 Photos
+
+#attachment_photos
+  - @attachment_photos.each do |attachment_photo|
+    == render attachment_photo
+    p
+      = link_to "Show this photo", attachment_photo
+
+= link_to "New photo", new_attachment_photo_path

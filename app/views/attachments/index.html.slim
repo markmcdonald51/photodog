@@ -1,0 +1,11 @@
+p style="color: green" = notice
+
+h1 Attachments
+
+#attachments
+  - @attachments.each do |attachment|
+    == render attachment
+    p
+      = link_to "Show this attachment", attachment
+
+= link_to "New attachment", new_attachment_path

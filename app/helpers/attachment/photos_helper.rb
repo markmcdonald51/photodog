@@ -1,0 +1,2 @@
+module Attachment::PhotosHelper
+end

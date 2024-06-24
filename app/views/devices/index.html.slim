@@ -1,0 +1,11 @@
+p style="color: green" = notice
+
+h1 Devices
+
+#devices
+  - @devices.each do |device|
+    == render device
+    p
+      = link_to "Show this device", device
+
+= link_to "New device", new_device_path

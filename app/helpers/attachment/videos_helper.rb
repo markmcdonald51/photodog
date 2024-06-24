@@ -1,0 +1,2 @@
+module Attachment::VideosHelper
+end
