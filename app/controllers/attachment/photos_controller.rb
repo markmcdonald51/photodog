@@ -3,7 +3,8 @@ class Attachment::PhotosController < ApplicationController
 
   # GET /attachment/photos or /attachment/photos.json
   def index
-    @attachment_photos = Attachment::Photo.all
+    #@photos = Photo.page params[:page]
+    @attachment_photos = Attachment::Photo.with_attached_image.page(params[:page])
   end
 
   # GET /attachment/photos/1 or /attachment/photos/1.json

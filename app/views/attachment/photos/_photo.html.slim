@@ -1,28 +1,35 @@
 div id="#{dom_id photo}"
-  p
-    strong Title:
-    =< photo.title
-  p
-    strong Altitude:
-    =< photo.altitude
-  p
-    strong Latitude:
-    =< photo.latitude
-  p
-    strong Longitude:
-    =< photo.longitude
-  p
-    strong Image views:
-    =< photo.image_views
-  p
-    strong Photo taken time:
-    =< photo.photo_taken_time
-  p
-    strong Url:
-    =< photo.url
-  p
-    strong Description:
-    =< photo.description
-  p
-    strong Device:
-    =< photo.device_id
+  = link_to photo.title  do 
+    = image_tag photo.image, class: "placeholder img-thumbnail card-img-top shadow-sm",
+      alt: photo.title, size: '10x10'
+    .small.text-center = photo.title
+    
+/
+  div id="#{dom_id photo}"
+    p
+      strong Title:
+      =< photo.title
+    p
+      strong Altitude:
+      =< photo.altitude
+    p
+      strong Latitude:
+      =< photo.latitude
+    p
+      strong Longitude:
+      =< photo.longitude
+    p
+      strong Image views:
+      =< photo.image_views
+    p
+      strong Photo taken time:
+      =< photo.photo_taken_time
+    p
+      strong Url:
+      =< photo.url
+    p
+      strong Description:
+      =< photo.description
+    p
+      strong Device:
+      =< photo.device_id

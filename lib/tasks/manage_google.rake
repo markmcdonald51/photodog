@@ -71,7 +71,8 @@ namespace :manage_google do
       photo_path = all_photos_hash[photo_file_name]
 
       if  photo_path.blank?
-        binding.pry 
+        #binding.pry 
+        puts "#{photo_path} not in hash!"
         next
       end  
       photo.image.attach(io: File.open(photo_path), filename: dh[:title])
