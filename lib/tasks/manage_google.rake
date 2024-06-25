@@ -56,15 +56,16 @@ namespace :manage_google do
       dh[:photo_taken_time] = Time.parse(json.dig('photoTakenTime', 'formatted')) unless json.dig('photoTakenTime', 'formatted').blank?
       dh[:url] = json.dig('url')
       dh[:description] = json.dig('description')
-      dh[:device_type] = json.dig('googlePhotosOrigin', 'mobileUpload', 'deviceType')
+      device_type = json.dig('googlePhotosOrigin', 'mobileUpload', 'deviceType')
       #people[ person ] += 1
-      photo = Photo.create!(dh)
+      photo = Attachment::Photo.create!(dh)
 
       # Remove the .jpeg.json to locate the actual location in the 
       # app_photos array
       photo_file_name = File.basename(f, '.*')
       photo_file_name = File.basename(photo_file_name, '.*')
 
+      photo.device = Device.find_or_create_by(name: device_type.downcase) if device_type.present?
 
       #dh[:title]
       photo_path = all_photos_hash[photo_file_name]
