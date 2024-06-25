@@ -69,7 +69,11 @@ namespace :manage_google do
 
       #dh[:title]
       photo_path = all_photos_hash[photo_file_name]
-      binding.pry unless photo_path.present?
+
+      if  photo_path.blank?
+        binding.pry 
+        next
+      end  
       photo.image.attach(io: File.open(photo_path), filename: dh[:title])
     
     end
