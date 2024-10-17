@@ -146,6 +146,7 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.5.1)
+    digest (3.1.1)
     drb (2.2.1)
     erubi (1.13.0)
     factory_bot (6.4.6)
@@ -520,6 +521,7 @@ DEPENDENCIES
   cssbundling-rails
   debug
   devise (~> 4.9)
+  digest
   factory_bot_rails
   faker
   friendly_id (~> 5.4)
