@@ -98,60 +98,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_06_22_094212) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "cities", force: :cascade do |t|
-    t.string "city", limit: 255
-    t.string "city_ascii", limit: 255
-    t.decimal "lat"
-    t.decimal "lng"
-    t.string "country_name", limit: 255
-    t.string "iso2", limit: 255
-    t.string "iso3", limit: 255
-    t.string "capital", limit: 255
-    t.bigint "population"
-    t.bigint "legacy_id"
-    t.bigint "country_id"
-    t.bigint "region_id"
-  end
-
-  create_table "countries", force: :cascade do |t|
-    t.string "iso", limit: 255
-    t.string "iso3", limit: 255
-    t.string "iso_numeric", limit: 255
-    t.string "fips", limit: 255
-    t.string "country", limit: 255
-    t.string "capital", limit: 255
-    t.string "area_km", limit: 255
-    t.string "population", limit: 255
-    t.string "continent", limit: 255
-    t.string "tld", limit: 255
-    t.string "currency_code", limit: 255
-    t.string "currency_name", limit: 255
-    t.string "phone", limit: 255
-    t.string "postal_code_format", limit: 255
-    t.string "postal_code_regex", limit: 255
-    t.string "language_currency", limit: 255
-    t.string "geonameid", limit: 255
-    t.string "neighbours", limit: 255
-    t.string "equivalent_fips_code", limit: 255
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.float "lat"
-    t.float "lng"
-  end
-
-  create_table "country_languages", force: :cascade do |t|
-    t.integer "country_id", null: false
-    t.integer "language_id", null: false
-  end
-
-  create_table "current_locations", force: :cascade do |t|
-    t.string "locatable_type", limit: 255, null: false
-    t.bigint "locatable_id", null: false
-    t.decimal "lat"
-    t.decimal "lng"
-    t.datetime "created_at", precision: nil, null: false
-  end
-
   create_table "devices", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -175,14 +121,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_06_22_094212) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["magazine_id"], name: "index_issues_on_magazine_id"
-  end
-
-  create_table "languages", force: :cascade do |t|
-    t.string "iso"
-    t.string "iso3"
-    t.string "iso_639_2b"
-    t.string "language_name"
-    t.string "native_name"
   end
 
   create_table "magazines", force: :cascade do |t|
@@ -231,16 +169,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_06_22_094212) do
     t.index ["user_id"], name: "index_photos_on_user_id"
   end
 
-  create_table "regions", force: :cascade do |t|
-    t.string "name", limit: 255
-    t.bigint "country_id", null: false
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.decimal "lat"
-    t.decimal "lng"
-    t.string "iso", limit: 255
-  end
-
   create_table "services", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "provider"
@@ -276,10 +204,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_06_22_094212) do
   add_foreign_key "articles", "authors"
   add_foreign_key "articles", "issues"
   add_foreign_key "attachments", "users"
-  add_foreign_key "country_languages", "countries"
-  add_foreign_key "country_languages", "languages"
   add_foreign_key "issues", "magazines"
   add_foreign_key "photos", "users"
-  add_foreign_key "regions", "countries"
   add_foreign_key "services", "users"
 end

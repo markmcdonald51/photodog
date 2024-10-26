@@ -17,10 +17,14 @@ namespace :manage_google do
     size_of_dups = photos_edited.map{|f| File.size(f)}.inject(0, :+)
     puts "Size of Dups: #{size_of_dups/ 1024000} Megsbytes"
 
-    binding.pry
     # Check for a duplicate using the path
-    { filename: 'name', hash: Digest::MD5.file(photos_edited.first).hexdigest  }
+    md5_photos = {}
+    all_photos.each do |photo_path|
+      #h = { filename: 'name', hash: Digest::MD5.file(photo_path).hexdigest  }
+      md5_photos[Digest::MD5.file(photo_path).hexdigest] = photo_path
+    end
 
+    
     photos_edited.each_with_index do |ef,i|
       p = ef.gsub(/\-edited/, '')  
       if File.exist?(p)   

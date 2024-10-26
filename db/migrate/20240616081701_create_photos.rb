@@ -10,6 +10,7 @@ class CreatePhotos < ActiveRecord::Migration[7.2]
       t.string :url
       t.text :description
       t.string :device_type
+      t.string :file_md5
       t.belongs_to :user, null: false, foreign_key: true
 
       t.timestamps
