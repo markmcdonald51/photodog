@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 #gem "rails", "~> 7.1.3.4"
-gem "rails", "~> 8.0.1"
+gem "rails", "~> 8.0.2"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 # Use sqlite3 as the database for Active Record
@@ -21,6 +21,7 @@ gem "jbuilder"
 # gem "redis", ">= 4.0.1"
 
 gem 'digest'
+gem "blake3-rb"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -28,7 +29,7 @@ gem 'digest'
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 
-
+gem 'colored'
 gem 'simple_form'
 gem 'slim-rails'
 gem 'geocoder'
@@ -68,12 +69,12 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
-
+  gem 'streamio-ffmpeg'
   gem 'pry-rails'
-  gem 'railroady'
-  gem 'rspec-rails'
-  gem 'faker'
-  gem "factory_bot_rails"
+  #gem 'railroady'
+  #gem 'rspec-rails'
+  #gem 'faker'
+  #gem "factory_bot_rails"
 end
 
 group :test do
