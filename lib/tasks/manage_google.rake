@@ -128,12 +128,10 @@ namespace :manage_google do
       puts "Starting #{f}"
       movie = FFMPEG::Movie.new(f.to_s)
       movies_meta_data_ary <<  ffmpeg_metadata.inject({}){|hash,item| 
-        binding.pry
         hash[item] = movie.send(item)
         hash
       }
-      #Digest::MD5.hexdigest(movies_meta_data_ary.first.to_json )
-      binding.pry
+      #Digest::MD5.hexdigest(movies_meta_data_ary.first.to_json ) 
     end
     #d = files.map.with_index {|f, i| puts "%i / %i" % [i, files.size] if i % 1000 == 12;  [f, Digest::MD5.file(f)] }.group_by(&:last).select {|a,v| v.size > 1 }
     
