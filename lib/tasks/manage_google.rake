@@ -142,6 +142,7 @@ namespace :manage_google do
       m = h[:filepath].basename.to_s.match(/^(.*)\-([\w]+)\.(.*)$/)
       file_name, view_id, suffix = m[1..3]
       puts "view_id: #{view_id}".red.underline
+      title_array = file_name.split
       binding.pry
     end
 
