@@ -125,7 +125,7 @@ namespace :manage_google do
     files.each_with_index do |f, i|
       #puts "#{i}) #{Digest::MD5.hexdigest(IO.read(f)).to_sym}"
       #File.open(f) { |f| puts Digest::MD5.hexdigest(f.read).to_sym }
-      puts "Starting #{f}"
+      puts "Starting #{f}".red
       movie = FFMPEG::Movie.new(f.to_s)
       movies_meta_data_ary <<  ffmpeg_metadata.inject({}){|hash,item| 
         hash[:filepath] ||= f
@@ -139,11 +139,10 @@ namespace :manage_google do
     #movies_meta_data_ary.first[:filepath].basename.to_s
     
     movies_meta_data_ary.each_with_index do |h, i| 
-      binding.pry
       m = h[:filepath].basename.to_s.match(/^(.*)\-([\w]+)\.(.*)$/)
-      file_name, view_id, suffix 
-      
-      # n = "this is a test fn-12ab34.mp4"
+      file_name, view_id, suffix = m[1..3]
+      puts "view_id: #{view_id}".red.underline
+      binding.pry
     end
 
 
