@@ -123,8 +123,6 @@ namespace :manage_google do
     width height frame_rate audio_stream audio_codec audio_sample_rate audio_channels)
     movies_meta_data_ary = []
     files.each_with_index do |f, i|
-      #puts "#{i}) #{Digest::MD5.hexdigest(IO.read(f)).to_sym}"
-      #File.open(f) { |f| puts Digest::MD5.hexdigest(f.read).to_sym }
       puts "Starting #{f}".red
       movie = FFMPEG::Movie.new(f.to_s)
       movies_meta_data_ary <<  ffmpeg_metadata.inject({}){|hash,item| 
@@ -135,18 +133,15 @@ namespace :manage_google do
       #Digest::MD5.hexdigest(movies_meta_data_ary.first.to_json ) 
     end
     #d = files.map.with_index {|f, i| puts "%i / %i" % [i, files.size] if i % 1000 == 12;  [f, Digest::MD5.file(f)] }.group_by(&:last).select {|a,v| v.size > 1 }
-    
     #movies_meta_data_ary.first[:filepath].basename.to_s
     
     movies_meta_data_ary.each_with_index do |h, i| 
       m = h[:filepath].basename.to_s.match(/^(.*)\-([\w]+)\.(.*)$/)
       file_name, view_id, suffix = m[1..3]
       puts "view_id: #{view_id}".red.underline
-      title_array = file_name.split
+      title_array = file_name.split   
       binding.pry
     end
-
-
     binding.pry
   end
 
