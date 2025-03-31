@@ -32,7 +32,7 @@ gem "blake3-rb"
 gem 'colored'
 gem 'simple_form'
 gem 'slim-rails'
-##gem 'geocoder'
+gem 'geocoder'
 gem 'aasm'
 #gem "bootstrap5_helper"
 #gem 'acts_as_tree'
@@ -71,6 +71,8 @@ group :development do
   gem "web-console"
   gem 'streamio-ffmpeg'
   gem 'pry-rails'
+  gem 'exif' # sudo dnf install libexif-devel.x86_64
+
   #gem 'railroady'
   #gem 'rspec-rails'
   #gem 'faker'

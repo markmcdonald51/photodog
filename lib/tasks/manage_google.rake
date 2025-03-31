@@ -118,6 +118,7 @@ namespace :manage_google do
     test  = args[:test] ? true : false
 
     files = Pathname(dir).glob("**/*").reject(&:directory?)
+    puts "There are #{files.length} in #{dir}".blue
     ffmpeg_metadata = %w(
     duration bitrate size video_stream video_codec colorspace resolution 
     width height frame_rate audio_stream audio_codec audio_sample_rate audio_channels)
@@ -128,6 +129,7 @@ namespace :manage_google do
       movies_meta_data_ary <<  ffmpeg_metadata.inject({}){|hash,item| 
         hash[:filepath] ||= f
         hash[item.to_sym] = movie.send(item)
+        hash[:ffmpeg] ||= movie
         hash
       }
       #Digest::MD5.hexdigest(movies_meta_data_ary.first.to_json ) 
