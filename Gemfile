@@ -71,6 +71,8 @@ group :development do
   gem "web-console"
   gem 'streamio-ffmpeg'
   gem 'pry-rails'
+
+  # Photo metadata https://github.com/tonytonyjan/exif
   gem 'exif' # sudo dnf install libexif-devel.x86_64
 
   #gem 'railroady'
