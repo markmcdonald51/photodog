@@ -123,13 +123,15 @@ namespace :manage_google do
     duration bitrate size video_stream video_codec colorspace resolution 
     width height frame_rate audio_stream audio_codec audio_sample_rate audio_channels)
     movies_meta_data_ary = []
+
+    binding.pry
     files.each_with_index do |f, i|
       puts "Starting #{f}".red
       movie = FFMPEG::Movie.new(f.to_s)
       movies_meta_data_ary <<  ffmpeg_metadata.inject({}){|hash,item| 
-        hash[:filepath] ||= f
+        hash[:filepath]   ||= f
         hash[item.to_sym] = movie.send(item)
-        hash[:ffmpeg] ||= movie
+        hash[:ffmpeg]     ||= movie
         hash
       }
       #Digest::MD5.hexdigest(movies_meta_data_ary.first.to_json ) 
